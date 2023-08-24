@@ -1,3 +1,4 @@
+from datetime import datetime
 class Medicamento:
     def __init__(self):
         self.__nombre = "" 
@@ -45,13 +46,16 @@ class Mascota:
     def asignarPeso(self,p):
         self.__peso=p
     def asignarFecha(self,f):
-        self.__fecha_ingreso=f
+        try:
+            self.__fecha_ingreso = datetime.strptime(f, "%d/%m/%Y")
+        except ValueError:
+            print("La fecha debe contener el formato DD/MM/AAAA")
     def asignarLista_Medicamentos(self,n):
         self.__lista_medicamentos = n 
     
 class sistemaV:
     def __init__(self):
-        self.__lista_mascotas = []
+        self.__lista_mascotas = {"caninos":[], "felinos":[]}
     
     def verificarExiste(self,historia):
         for m in self.__lista_mascotas:
