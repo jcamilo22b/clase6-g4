@@ -58,9 +58,10 @@ class sistemaV:
         self.__lista_mascotas = {"caninos":[], "felinos":[]}
     
     def verificarExiste(self,historia):
-        for m in self.__lista_mascotas:
-            if historia == m.verHistoria():
-                return True
+        for m in self.__lista_mascotas.values:
+            for masc in m:
+                if historia == m.verHistoria():
+                 return True
         #solo luego de haber recorrido todo el ciclo se retorna False
         return False
         
@@ -73,9 +74,14 @@ class sistemaV:
 
     def verFechaIngreso(self,historia):
         #busco la mascota y devuelvo el atributo solicitado
-        for masc in self.__lista_mascotas:
-            if historia == masc.verHistoria():
-                return masc.verFecha() 
+        for mascotas in self.__lista_mascotas.values():
+            for masc in mascotas:
+                if historia == masc.verHistoria():
+                    fecha = masc.verHioria()
+                    if fecha is not None:
+                        return fecha.strftime("%d/%m/%Y")
+                    else:
+                        return None 
         return None
 
     def verMedicamento(self,historia):
@@ -86,7 +92,7 @@ class sistemaV:
         return None
     
     def eliminarMascota(self, historia):
-        for masc in self.__lista_mascotas:
+        for masc in self.__lista_mascotas.values():
             if historia == masc.verHistoria():
                 self.__lista_mascotas.remove(masc)  #opcion con el pop
                 return True  #eliminado con exito
